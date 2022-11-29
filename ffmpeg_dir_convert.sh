@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 if [ "$1" = "help" ] || [ "$1" = "h" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "/?" ]; then
 	echo $1
 	echo "[DIR SRC] [SRC FILE FORMAT] [TARGET DIR] [TARGET FORMAT]"
