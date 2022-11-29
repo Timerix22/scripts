@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 if [ "$1" = "help" ] || [ "$1" = "h" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "/?" ]; then
 	echo $1
 	echo "[DIR SRC] [SRC FILE FORMAT] [TARGET DIR] [TARGET FORMAT]"
@@ -13,7 +13,7 @@ DOUT="$3"
 EXTOUT="$4"
 for FIN in $(find "$DIN" -name "*.$EXTIN" )
 do
-	FOUT="$DOUT"/$(basename "$FIN" "*.$EXTIN")."$EXTOUT"
+	FOUT="$DOUT"/$(basename "$FIN" ".$EXTIN")."$EXTOUT"
 	echo "$FIN -> $FOUT"
 	ffmpeg -i "$FIN" -c mp3 "$FOUT" -y -hide_banner -loglevel error -stats
 	echo ""
