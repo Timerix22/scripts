@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+SRCFILE=$1
+BACKDIR="$(pwd)"
+
+TMPDIR=.csrun_tmp_$SRCFILE
+if [ ! -d $TMPDIR ]; then
+    mkdir $TMPDIR
+fi
+
+cd $TMPDIR
+if [ ! -f $TMPDIR.csproj ]; then
+    dotnet new console
+    rm Program.cs
+fi
+cp $BACKDIR/$SRCFILE ./
+
+cd "$BACKDIR"
+dotnet run --project $TMPDIR/$TMPDIR.csproj
