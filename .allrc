@@ -1,2 +1,2 @@
 #!/bin/bash
-source ~/.path
+source /home/timerix/.path
