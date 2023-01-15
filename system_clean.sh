@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-df /home
+df -h /home
 # apt cache
 sudo apt clean
 dpkg --list |grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge
@@ -12,4 +12,4 @@ rm -rf ~/.nuget
 rm -rf ~/.local/share/NuGet
 # unused locales
 sudo localepurge
-df /home
+df -h /home
