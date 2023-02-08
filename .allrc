@@ -1,2 +1,13 @@
 #!/bin/bash
-source /home/timerix/.path
+[[ -f ~/.path ]] && source ~/.path
+
+function mkcd {
+    mkdir -p $1
+    cd $1
+}
+
+function rmcd {
+    local dir=$pwd
+    cd ..
+    rm -rf $dir
+}
