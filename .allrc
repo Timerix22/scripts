@@ -7,7 +7,13 @@ function mkcd {
 }
 
 function rmcd {
-    local dir=$pwd
+    local dir=$(pwd)
     cd ..
-    rm -rf $dir
+    if [ "$1" = "-f" ]; then
+        rm -rf $dir
+    else
+        echo "remove dir $dir? [y/any]"
+        read answ
+        [[ "$answ" = "y" ]] && rm -rf $dir
+    fi
 }
