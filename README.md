@@ -12,8 +12,9 @@ echo "source ~/.allrc" >> ~/.bashrc
 
 ## zsh
 This repo contains my oh-my-zsh config and theme.  
-**Theme installation:**
+**Installation:**
 ```sh
+ln -s $(realpath .zshrc) ~/
 cp my-afowler.zsh-theme ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/themes/
 ```
 
