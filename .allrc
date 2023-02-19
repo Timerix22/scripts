@@ -17,3 +17,7 @@ function rmcd {
         [[ "$answ" = "y" ]] && rm -rf $dir
     fi
 }
+
+function pacman_autoremove {
+    [[ ! -z $(pacman -Qdtq) ]] && sudo pacman -Rsn $(pacman -Qdtq)
+}
