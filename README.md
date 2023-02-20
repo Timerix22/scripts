@@ -10,6 +10,10 @@ echo 'source ~/.allrc' >> ~/.bashrc
 ```
 
 ## zsh
+First install zsh (pacman -S zsh or something like that). Then install oh-my-zsh: 
+```sh
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+``` 
 This repo contains my oh-my-zsh config and theme.  
 **Installation:**
 ```sh
