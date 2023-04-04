@@ -1,19 +1,35 @@
-#!/bin/bash
+#!/bin/sh
 set -e
+
 if [ $# -eq 0 ] || [ "$1" = "help" ] || [ "$1" = "h" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "/?" ]; then
-	echo "usage: ffmpeg_dir_convert.sh [DIR_SRC] [SRC_FILE_EXT] [TARGET_DIR] [TARGET_FILE_EXT]"
-	echo "EXAMPLE: ffmpeg_dir_convert.sh downloads ogg music/new mp3"
-	echo "!!! file names must not contain spaces !!!"
+	echo "	usage: ffmpeg_dir_convert.sh [DIR_SRC] [SRC_FILE_EXT] [OUT_DIR] [OUT_FILE_EXT]
+	optional: [FFMPEG_ARGS] [FFMPEG_ARGS_PRE] [FFMPEG_ARGS_POST]
+		additional args for ffmpeg
+	EXAMPLE: ffmpeg_dir_convert.sh downloads ogg music/new mp3 \"-c aac\""
 	exit 0
 fi
-DIN="$1"
-EXTIN="$2"
-DOUT="$3"
-EXTOUT="$4"
-for FIN in $(find "$DIN" -name "*.$EXTIN" )
+SRC_DIR="$1"
+SRC_FILE_EXT="$2"
+OUT_DIR="$3"
+OUT_FILE_EXT="$4"
+FFMPEG_ARGS="$5"
+FFMPEG_ARGS_PRE="$6"
+FFMPEG_ARGS_POST="$7"
+# codec detection
+if [[ -z $FFMPEG_ARGS ]]; then
+	echo "ffmpeg_args is null, setting codec to $OUT_FILE_EXT"
+	FFMPEG_ARGS="-c $OUT_FILE_EXT"
+fi
+FFMPEG_ARGS="-y -hide_banner -loglevel warning -stats  $FFMPEG_ARGS"
+mkdir -p "$OUT_DIR"
+# for loop ignore spaces
+IFS=$'\n'
+for SRC_FILE in $(find "$SRC_DIR" -type f -name "*.$SRC_FILE_EXT" )
 do
-	FOUT="$DOUT"/$(basename "$FIN" ".$EXTIN")."$EXTOUT"
-	echo "$FIN -> $FOUT"
-	ffmpeg -i "$FIN" -c mp3 "$FOUT" -y -hide_banner -loglevel error -stats
+	OUT_FILE="$OUT_DIR"/$(basename "$SRC_FILE" ".$SRC_FILE_EXT")."$OUT_FILE_EXT"
+	echo "$SRC_FILE -> $OUT_FILE"
+	IFS=$' '
+	ffmpeg $FFMPEG_ARGS_PRE -i "$SRC_FILE" $FFMPEG_ARGS "$OUT_FILE" $FFMPEG_ARGS_POST
+	IFS=$'\n'
 	echo ""
 done

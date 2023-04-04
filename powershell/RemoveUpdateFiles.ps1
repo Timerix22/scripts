@@ -1,6 +1,6 @@
 # cleans WinSxS dir
-Dism /Online /Cleanup-Image /RestoreHealth
-DISM.exe /online /Cleanup-Image /StartComponentCleanup
-DISM.exe /online /Cleanup-Image /SPSuperseded
-DISM.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+dism /Online /Cleanup-Image /RestoreHealth
+dism /online /Cleanup-Image /StartComponentCleanup /ResetBase
+dism /online /Cleanup-Image /SPSuperseded
+dism /online /Cleanup-Image /StartComponentCleanup /AnalyzeComponentStore
 # then reboot
