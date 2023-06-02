@@ -1,6 +1,6 @@
 #!/bin/bash
 [[ -f $HOME/.path ]] && source $HOME/.path
-export PATH=$PATH:$HOME/scripts/bin
+export PATH=$PATH:/usr/local/share/scripts/bin
 
 function mkcd {
     mkdir -p $1

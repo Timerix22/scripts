@@ -2,11 +2,14 @@
 There i store some useful bash scripts from all my linux machines.
 
 ## setup
-```bash
+```sh
+su
+cd /usr/local/share
 git clone https://github.com/Timerix22/scripts.git
 ln -s $(realpath scripts/.allrc) ~/
 echo 'source ~/.allrc' >> ~/.zshrc
 echo 'source ~/.allrc' >> ~/.bashrc
+exit
 ```
 
 ## zsh
