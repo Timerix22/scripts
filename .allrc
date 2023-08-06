@@ -1,11 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 [[ -f $HOME/.path ]] && source $HOME/.path
 export PATH=$PATH:/usr/local/share/scripts/bin
+
+# functions
+
+function export_func {
+    export -f "$1" > /dev/null 2>&1
+    export "$1" > /dev/null 2>&1
+}
 
 function mkcd {
     mkdir -p $1
     cd $1
 }
+export_func mkcd
 
 function rmcd {
     local dir=$(pwd)
@@ -18,7 +26,9 @@ function rmcd {
         [[ "$answ" = "y" ]] && rm -rf $dir
     fi
 }
+export_func rmcd
 
 function pacman_autoremove {
     [[ ! -z $(pacman -Qdtq) ]] && sudo pacman -Rsn $(pacman -Qdtq)
 }
+export_func pacman_autoremove
