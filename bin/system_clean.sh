@@ -68,7 +68,7 @@ function clean_userdir {
   rm -f "$userdir"/.zcompdump*
 }
 
-clean_userdir root
+clean_userdir /root
 for user in $(ls /home); do
   clean_userdir /home/$user
 done
